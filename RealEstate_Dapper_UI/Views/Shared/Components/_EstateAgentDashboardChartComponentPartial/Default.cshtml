@@ -1,0 +1,75 @@
+﻿@model List<ResultEstateAgentDashboardChartDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <style>
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <canvas id="myChart" style="width:100%;max-width:500px"></canvas>
+        <canvas id="myChart1" style="width:100%;max-width:500px"></canvas>
+    </div>
+
+    <script>
+        var xValuesChart1 = @Html.Raw(Json.Serialize(Model.Select(item => item.City)));
+        var yValuesChart1 = @Html.Raw(Json.Serialize(Model.Select(item => item.CityCount)));
+        var backColors1 = ["rgba(54, 162, 235, 1)", "rgba(54, 162, 235, 0.8)", "rgba(54, 162, 235, 0.6)", "rgba(54, 162, 235, 0.4)", "rgba(54, 162, 235, 0.2)"];
+        var barColors1 = ["rgba(54, 162, 235, 1)", "rgba(54, 162, 235, 1)", "rgba(54, 162, 235, 1)", "rgba(54, 162, 235, 1)", "rgba(54, 162, 235, 1)"];
+
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValuesChart1,
+                datasets: [{
+                    backgroundColor: backColors1,
+                    borderColor: barColors1,
+                    data: yValuesChart1
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Şehir - İlan İstatistiği"
+                }
+            }
+        });
+
+        var xValuesChart2 = @Html.Raw(Json.Serialize(Model.Select(item => item.City)));
+        var yValuesChart2 = @Html.Raw(Json.Serialize(Model.Select(item => item.CityCount)));
+        var backColors2 = ["rgb(58, 166, 185, 1)", "rgb(58, 166, 185, 0.8)", "rgb(58, 166, 185, 0.6)", "rgb(58, 166, 185, 0.4)", "rgb(58, 166, 185, 0.2)"];
+        var barColors2 = ["rgb(58, 166, 185, 1)", "rgb(58, 166, 185, 1)", "rgb(58, 166, 185, 1)", "rgb(58, 166, 185, 1)", "rgb(58, 166, 185, 1)"];
+
+        new Chart("myChart1", {
+            type: "bar",
+            data: {
+                labels: xValuesChart2,
+                datasets: [{
+                    backgroundColor: backColors2,
+                    borderColor: barColors2,
+                    data: yValuesChart2
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Şehir - İlan İstatistiği"
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
